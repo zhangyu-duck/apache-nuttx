@@ -57,7 +57,7 @@ set(CMAKE_ASM_ARCHIVE_CREATE "<CMAKE_AR> rcs <TARGET> <LINK_FLAGS> <OBJECTS>")
 # Architecture flags
 
 add_compile_options(--lsl-core=vtc)
-add_compile_options(--iso=99)
+add_compile_options(--iso=17)
 add_compile_options(--language=+gcc,+volatile,-strings,-kanji)
 
 if(CONFIG_DEBUG_CUSTOMOPT)
