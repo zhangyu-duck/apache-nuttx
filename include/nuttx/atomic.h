@@ -28,15 +28,9 @@
  ****************************************************************************/
 
 #include <stdbool.h>
+#include <sys/types.h>
 
-#define NEED_ATOMIC_MACROS
-#if defined(__has_include)
-#  if __has_include(<atomic>) && defined(__cplusplus)
-#    undef NEED_ATOMIC_MACROS
-#  endif
-#endif
-
-#if defined(__has_include) && !defined(CONFIG_LIBC_ARCH_ATOMIC)
+#if !defined(CONFIG_LIBC_ARCH_ATOMIC)
 #  if __has_include(<atomic>) && defined(__cplusplus)
 extern "C++"
 {
@@ -57,7 +51,7 @@ extern "C++"
   typedef volatile int32_t atomic_t;
   typedef volatile int64_t atomic64_t;
 }
-#  elif __has_include(<stdatomic.h>) && \
+#  elif !defined(__STDC_NO_ATOMICS__) && \
         ((defined(__cplusplus) && __cplusplus >= 201103L) || \
          (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L)) && \
          !defined(__STDC_NO_ATOMICS__)
